@@ -3,7 +3,7 @@
     public class AppConfig
     {
         public TinyMCE TinyMCE { get; set; } = new TinyMCE();
-        public StudentPlatform StudntPlatform { get; set; } = new StudentPlatform();
+        public StudentPlatform StudentPlatform { get; set; } = new StudentPlatform();
     }
 
     public class TinyMCE
