@@ -7,7 +7,6 @@ namespace StudentPlatform
         public static async Task Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            WebApplication app = builder.Build();
 
             // Подключаем в конфигурацию файл appsettings.json
             IConfigurationBuilder configBuild = new ConfigurationBuilder()
@@ -18,10 +17,18 @@ namespace StudentPlatform
             // Оборачиваем секцию Project в обьектную форму для удобства
             IConfiguration configuration = configBuild.Build();
             AppConfig config = configuration.GetSection("Project").Get<AppConfig>()!;
-
-            app.MapGet("/", () => "Hello World!");
-
-            app.Run();
+            // Подкючаем функционал контроллеров
+            builder.Services.AddControllersWithViews();
+            // Собираем концфигурацию
+            WebApplication app = builder.Build();
+            // Порядок слеодования middleware очень важен, они буду выполняться согласно нему
+            // Подключаем использование статичных файлов
+            app.UseStaticFiles();
+            // Подключаем маршрутизацию
+            app.UseRouting();
+            // Регистрируем нужные маршруты
+            app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            await app.RunAsync();
         }
     }
 }
