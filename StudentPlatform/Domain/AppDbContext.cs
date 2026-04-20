@@ -51,5 +51,3 @@ namespace StudentPlatform.Domain
         }
     }
 }
-
-// 41.45 qwq

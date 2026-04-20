@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using StudentPlatform.Domain;
 using StudentPlatform.Infrastructure;
 
 namespace StudentPlatform
@@ -17,15 +21,41 @@ namespace StudentPlatform
             // Оборачиваем секцию Project в обьектную форму для удобства
             IConfiguration configuration = configBuild.Build();
             AppConfig config = configuration.GetSection("Project").Get<AppConfig>()!;
+            // Подключаем контекст бд
+            builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString)
+            .ConfigureWarnings(WarningsConfiguration => WarningsConfiguration.Ignore(RelationalEventId.PendingModelChangesWarning))); // Предупреждения на всякий случай подавляем
+            // Настравиваем Identity систему
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            // Настравиваем auth cookie
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "studentPlatformAuth";
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/admin/login";
+                options.AccessDeniedPath = "/admin/accessdenied";
+                options.SlidingExpiration = true;
+            });
             // Подкючаем функционал контроллеров
             builder.Services.AddControllersWithViews();
             // Собираем концфигурацию
             WebApplication app = builder.Build();
-            // Порядок слеодования middleware очень важен, они буду выполняться согласно нему
+            // Порядок следования middleware очень важен, они буду выполняться согласно нему
             // Подключаем использование статичных файлов
             app.UseStaticFiles();
             // Подключаем маршрутизацию
             app.UseRouting();
+            // Пoдключаем аутенфикацию и авторизацию
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseAuthorization();
             // Регистрируем нужные маршруты
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             await app.RunAsync();

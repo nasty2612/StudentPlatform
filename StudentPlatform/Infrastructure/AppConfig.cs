@@ -4,6 +4,12 @@
     {
         public TinyMCE TinyMCE { get; set; } = new TinyMCE();
         public StudentPlatform StudentPlatform { get; set; } = new StudentPlatform();
+        public Database Database { get; set; } = new Database();
+    }
+
+    public class Database
+    {
+        public string? ConnectionString { get; set; }
     }
 
     public class TinyMCE
