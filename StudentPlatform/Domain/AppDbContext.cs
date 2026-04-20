@@ -30,7 +30,7 @@ namespace StudentPlatform.Domain
             });
 
             // Добавляем нового IdentityUser  как администратора сайта
-            builder.Entity<IdentityRole>().HasData(new IdentityUser()
+            builder.Entity<IdentityUser>().HasData(new IdentityUser()
             {
                 Id = UserAdminId,
                 UserName = adminName,
