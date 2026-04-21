@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using StudentPlatform.Domain;
+using StudentPlatform.Domain.Repositories.Abstract;
+using StudentPlatform.Domain.Repositories.EntityFramework;
 using StudentPlatform.Infrastructure;
 
 namespace StudentPlatform
@@ -24,6 +26,10 @@ namespace StudentPlatform
             // Подключаем контекст бд
             builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString)
             .ConfigureWarnings(WarningsConfiguration => WarningsConfiguration.Ignore(RelationalEventId.PendingModelChangesWarning))); // Предупреждения на всякий случай подавляем
+            // Вставляем репозитории для функций
+            builder.Services.AddTransient<IServiceCategoriesRepository, EFServiceCategoriesRepository>();
+            builder.Services.AddTransient<IServicesRepository, EFServicesRepository>();
+            builder.Services.AddTransient<DataManager>();
             // Настравиваем Identity систему
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
@@ -39,7 +45,7 @@ namespace StudentPlatform
             {
                 options.Cookie.Name = "studentPlatformAuth";
                 options.Cookie.HttpOnly = true;
-                options.LoginPath = "/admin/login";
+                options.LoginPath = "/account/login";
                 options.AccessDeniedPath = "/admin/accessdenied";
                 options.SlidingExpiration = true;
             });

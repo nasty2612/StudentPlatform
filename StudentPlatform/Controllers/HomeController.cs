@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentPlatform.Domain;
 
 namespace StudentPlatform.Controllers
 {
