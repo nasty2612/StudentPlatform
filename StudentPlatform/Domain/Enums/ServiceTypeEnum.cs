@@ -2,7 +2,8 @@
 {
     public enum ServiceTypeEnum
     {
-        Private,
-        Public
+        Tech,
+        Human,
+        Other
     }
 }
