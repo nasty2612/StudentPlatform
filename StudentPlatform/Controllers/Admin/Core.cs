@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentPlatform.Domain;
+using System.Security.Cryptography;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace StudentPlatform.Controllers.Admin
 {
@@ -28,6 +31,14 @@ namespace StudentPlatform.Controllers.Admin
             await using FileStream stream = new FileStream(path, FileMode.Create);
             await img.CopyToAsync(stream);
             return path;
+        }
+
+        // Сохраняем картинку из редактора
+        public async Task<string> SaveEditorImg()
+        {
+            IFormFile img = Request.Form.Files[0];
+            await SaveImg(img);
+            return JsonSerializer.Serialize(new {location = Path.Combine("/img/", img.FileName)});
         }
     }
 }

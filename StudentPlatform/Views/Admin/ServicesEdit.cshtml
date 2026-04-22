@@ -4,6 +4,12 @@
     string strTitle = "Редактировать запись";
     ViewBag.Titlr = strTitle;
 }
+<style>
+    button {
+        color: black !important;
+    }
+</style>
+<script src="https://cdn.tiny.cloud/1/e3f2xlqe1hl4x5gz5cn0mdgekpq4a7zy0jxkdcc3sqma3oad/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 <div>
     <h2>
         @strTitle
@@ -56,3 +62,17 @@
         </form>
     </div>
 </div>
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      language: 'ru',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+      automatic_uploads: true,
+      images_upload_url: '/admin/SaveEditorImg',
+      images_upload_filename: true,
+      image_dimensions: false,
+      paste_data_images: true,
+      convert_urls: false
+    });
+</script>

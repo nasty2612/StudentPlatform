@@ -14,7 +14,7 @@ namespace StudentPlatform.Controllers.Admin
             return View(entity);
         }
         [HttpPost]
-        public async Task<IActionResult> ServicesEdit(ServiceCollection entity, IFormFile? titleImageFile)
+        public async Task<IActionResult> ServicesEdit(Service entity, IFormFile? titleImageFile)
         {
             // в случае ошибки отправляем на доработку
             if (!ModelState.IsValid)
@@ -25,7 +25,7 @@ namespace StudentPlatform.Controllers.Admin
             if (titleImageFile != null)
             {
                 entity.Photo = titleImageFile.FileName;
-                await SaveImage(titleImageFile);
+                await SaveImg(titleImageFile);
             }
             await _dataManager.Services.SaveServiceAsync(entity);
             return RedirectToAction("Index");

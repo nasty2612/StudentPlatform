@@ -56,7 +56,7 @@
                         <span>
                             @($"{entity.serviceCategory?.Title}") |
                             <a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id">
-                                @("{entity.Title}")
+                                @entity.Title
                             </a>
                         </span>
                     </div>
