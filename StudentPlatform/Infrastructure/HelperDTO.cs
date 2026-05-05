@@ -14,7 +14,7 @@ namespace StudentPlatform.Infrastructure
             entityDTO.Title = entity.Title;
             entityDTO.DescriptionShort = entity.DescriptionShort;
             entityDTO.Description = entity.Description;
-            entityDTO.PhoneFileName = entity.Photo;
+            entityDTO.PhotoFileName = entity.Photo;
             entityDTO.Type = entity.Type.ToString();
 
             return entityDTO;

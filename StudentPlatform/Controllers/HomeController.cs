@@ -9,5 +9,9 @@ namespace StudentPlatform.Controllers
         {
             return View();
         }
+        public IActionResult Contacts() 
+        { 
+            return View();
+        }
     }
 }

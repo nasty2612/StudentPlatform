@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Serilog;
 using StudentPlatform.Domain;
 using StudentPlatform.Domain.Repositories.Abstract;
 using StudentPlatform.Domain.Repositories.EntityFramework;
@@ -51,9 +52,16 @@ namespace StudentPlatform
             });
             // Подкючаем функционал контроллеров
             builder.Services.AddControllersWithViews();
+            // Подключаем логи
+            builder.Host.UseSerilog((context , configuration) => configuration.ReadFrom.Configuration(context.Configuration));
             // Собираем концфигурацию
             WebApplication app = builder.Build();
             // Порядок следования middleware очень важен, они буду выполняться согласно нему
+            // Сразу же используем логгирование
+            app.UseSerilogRequestLogging();
+            // Далее подключаем обработку исключений
+            if (app.Environment.IsDevelopment())
+                app.UseDeveloperExceptionPage();
             // Подключаем использование статичных файлов
             app.UseStaticFiles();
             // Подключаем маршрутизацию

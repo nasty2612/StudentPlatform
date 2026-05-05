@@ -24,12 +24,14 @@ namespace StudentPlatform.Controllers.Admin
                 return View(entity);
             }
             await _dataManager.ServiceCategories.SaveServiceCategoryAsync(entity);
+            _logger.LogInformation($"Добавлена/обновлена новая категория с ID: {entity.Id}");
             return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<IActionResult> ServiceCategoriesDelete (int id)
         {
             await _dataManager.ServiceCategories.DeleteServiceCategoryAsync(id);
+            _logger.LogInformation($"Удалена категория с ID: {id}");
             return RedirectToAction("Index");
         }
     }
