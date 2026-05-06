@@ -9,7 +9,7 @@ namespace StudentPlatform.Controllers.Admin
         public async Task<IActionResult> ServicesEdit(int id)
         {
             // В зависимости от id либо добавляем, либо изменяем id
-            Service? entity = id == default ? new Service() : await _dataManager.Services.GetServiceByIdAsync(id);
+            Service? entity = id == default ? new Service() { UserId = _userManager.GetUserId(User)} : await _dataManager.Services.GetServiceByIdAsync(id);
             ViewBag.ServiceCategories = await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
             return View(entity);
         }

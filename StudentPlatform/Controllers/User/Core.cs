@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentPlatform.Domain;
-using System.Security.Claims;
+using System.Text.Json;
 
 namespace StudentPlatform.Controllers.User
 {
@@ -26,11 +26,11 @@ namespace StudentPlatform.Controllers.User
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            var allServices = await _dataManager.Services.GetServicesAsync();
-
-            // Фильтруем: только те услуги, где UserId совпадает с текущим
-            ViewBag.Services = allServices.Where(x => x.UserId == userId);
             ViewBag.ServiceCategories = await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
+
+            // Загружаем только услуги этого пользователя
+            var allServices = await _dataManager.Services.GetServicesAsync();
+            ViewBag.Services = allServices.Where(x => x.UserId == userId);
 
             return View();
         }

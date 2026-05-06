@@ -23,5 +23,6 @@ namespace StudentPlatform.Domain.Entities
 
         [Display(Name = "Тип поста")]
         public ServiceTypeEnum Type { get; set; }
+        public string? UserId { get; internal set; }
     }
 }

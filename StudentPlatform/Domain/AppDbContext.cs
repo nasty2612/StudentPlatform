@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using StudentPlatform.Domain.Entities;
+using StudentPlatform.Domain.Entities.StudentPlatform.Domain.Entities;
 namespace StudentPlatform.Domain
 {
     // Контекст бд
@@ -10,6 +11,7 @@ namespace StudentPlatform.Domain
     {
         public DbSet<ServiceCategory> ServiceCategories { get; set; } = null!;
         public DbSet<Service> Services { get; set; } = null!;
+        public DbSet<Transcription> Transcriptions { get; set; } = null!;
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

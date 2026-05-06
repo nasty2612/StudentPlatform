@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentPlatform.Domain;
 
@@ -11,9 +12,11 @@ using StudentPlatform.Domain;
 namespace StudentPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260506015725__users")]
+    partial class _users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace StudentPlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "552c7929-8715-43fa-95b1-bebd9f6f71d6",
+                            Id = "6a61bc02-0964-4e42-bbb9-ef14fba0a9cd",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f6e8d0fc-05a4-4e4d-9f6b-49ce0f6b2cee",
+                            Id = "5a2cfb47-a7be-4fdd-8568-261ae68c0ccc",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -155,15 +158,15 @@ namespace StudentPlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "44144e4b-6b76-4f71-b01e-141b40660918",
+                            Id = "f2535b7c-8180-474b-991d-5646d4ece2ab",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "db4cbeae-0625-4841-8924-9dd2962dc52c",
+                            ConcurrencyStamp = "ab3fc952-5f04-4d5f-938e-94e42002dbfe",
                             Email = "bnastya261206@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "bnastya261206@mail.ru",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ4a004s9DK8/iXqoj5VU70+VhBzd1J9Ycg0Z/f/5116gCtN4cyZqId7/IkbwTQSnw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELKDXyV0rnSM8qR48W4tvMH72hrOOnQi4gEEmpulIShD5lMlpFh//n+MPks8biMOMg==",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
                             TwoFactorEnabled = true,
@@ -235,8 +238,8 @@ namespace StudentPlatform.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "44144e4b-6b76-4f71-b01e-141b40660918",
-                            RoleId = "552c7929-8715-43fa-95b1-bebd9f6f71d6"
+                            UserId = "f2535b7c-8180-474b-991d-5646d4ece2ab",
+                            RoleId = "6a61bc02-0964-4e42-bbb9-ef14fba0a9cd"
                         });
                 });
 
@@ -322,34 +325,6 @@ namespace StudentPlatform.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ServiceCategories");
-                });
-
-            modelBuilder.Entity("StudentPlatform.Domain.Entities.StudentPlatform.Domain.Entities.Transcription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AudioFileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TextFileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Transcriptions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

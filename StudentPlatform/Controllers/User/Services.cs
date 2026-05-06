@@ -8,18 +8,13 @@ namespace StudentPlatform.Controllers.User
         public async Task<IActionResult> ServicesEdit(int id)
         {
             var userId = _userManager.GetUserId(User);
-            Service? entity;
+            // Если ID новый — создаем пустой объект с привязкой к юзеру, иначе ищем в базе
+            Service? entity = id == default
+                ? new Service { UserId = userId }
+                : await _dataManager.Services.GetServiceByIdAsync(id);
 
-            if (id == default)
-            {
-                entity = new Service { UserId = userId };
-            }
-            else
-            {
-                entity = await _dataManager.Services.GetServiceByIdAsync(id);
-                // Защита: если пост не твой — доступ запрещен
-                if (entity?.UserId != userId) return Forbid();
-            }
+            // Если юзер пытается зайти в чужой ID через адресную строку — отбиваем
+            if (id != default && entity?.UserId != userId) return Forbid();
 
             ViewBag.ServiceCategories = await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
             return View(entity);
@@ -34,7 +29,7 @@ namespace StudentPlatform.Controllers.User
                 return View(entity);
             }
 
-            // Принудительно привязываем к текущему юзеру
+            // Гарантируем, что UserId не подменен
             entity.UserId = _userManager.GetUserId(User);
 
             if (titleImageFile != null)
@@ -44,6 +39,7 @@ namespace StudentPlatform.Controllers.User
             }
 
             await _dataManager.Services.SaveServiceAsync(entity);
+            _logger.LogInformation($"Пользователь {entity.UserId} обновил пост {entity.Id}");
             return RedirectToAction("Index");
         }
 
@@ -60,3 +56,4 @@ namespace StudentPlatform.Controllers.User
         }
     }
 }
+

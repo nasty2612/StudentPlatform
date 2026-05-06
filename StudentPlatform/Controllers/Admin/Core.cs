@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentPlatform.Domain;
 using System.Security.Cryptography;
@@ -13,11 +14,13 @@ namespace StudentPlatform.Controllers.Admin
         private readonly DataManager _dataManager;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ILogger<AdminController> _logger;
-        public AdminController(DataManager dataManager, IWebHostEnvironment hostingEnvironment, ILogger<AdminController> logger)
+        private readonly UserManager<IdentityUser> _userManager;
+        public AdminController(DataManager dataManager, IWebHostEnvironment hostingEnvironment, ILogger<AdminController> logger, UserManager<IdentityUser> userManager)
         {
             _dataManager = dataManager;
             _hostingEnvironment = hostingEnvironment;
             _logger = logger;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
