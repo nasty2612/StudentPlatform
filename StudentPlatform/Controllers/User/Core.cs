@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentPlatform.Domain;
+using StudentPlatform.Domain.Repositories.Abstract;
 using System.Text.Json;
 
 namespace StudentPlatform.Controllers.User
@@ -13,7 +14,6 @@ namespace StudentPlatform.Controllers.User
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ILogger<UserController> _logger;
         private readonly UserManager<IdentityUser> _userManager;
-
         public UserController(DataManager dataManager, IWebHostEnvironment hostingEnvironment,
                               ILogger<UserController> logger, UserManager<IdentityUser> userManager)
         {

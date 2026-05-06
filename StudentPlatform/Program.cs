@@ -5,6 +5,7 @@ using Serilog;
 using StudentPlatform.Domain;
 using StudentPlatform.Domain.Repositories.Abstract;
 using StudentPlatform.Domain.Repositories.EntityFramework;
+using StudentPlatform.Domain.Services;
 using StudentPlatform.Infrastructure;
 
 namespace StudentPlatform
@@ -31,6 +32,8 @@ namespace StudentPlatform
             builder.Services.AddTransient<IServiceCategoriesRepository, EFServiceCategoriesRepository>();
             builder.Services.AddTransient<IServicesRepository, EFServicesRepository>();
             builder.Services.AddTransient<DataManager>();
+            builder.Services.AddTransient<ITranscriptionsRepository, EFTranscriptionsRepository>();
+            builder.Services.AddTransient<ITranscriptionService>(sp => new TranscriptionService(builder.Environment.WebRootPath));
             // Настравиваем Identity систему
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {

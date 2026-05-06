@@ -12,7 +12,7 @@ namespace StudentPlatform.Controllers.User
 
             var userId = _userManager.GetUserId(User);
 
-            // 1. Сохраняем аудио
+            // Сохраняем аудио
             string audioFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/audio/");
             if (!Directory.Exists(audioFolder)) Directory.CreateDirectory(audioFolder);
 
@@ -22,17 +22,12 @@ namespace StudentPlatform.Controllers.User
                 await audioFile.CopyToAsync(stream);
             }
 
-            // 2. Место для Whisper (имитация создания файла)
             string fileName = $"transcription_{Guid.NewGuid()}.txt";
             string txtFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/txt/");
             if (!Directory.Exists(txtFolder)) Directory.CreateDirectory(txtFolder);
 
             string txtPath = Path.Combine(txtFolder, fileName);
-            await System.IO.File.WriteAllTextAsync(txtPath, "Здесь будет результат работы Whisper AI...");
-
-            // 3. Запись в БД (чтобы файл отобразился в списке для скачивания)
-            // transcription.UserId = userId; 
-            // transcription.TextFilePath = fileName;
+            await System.IO.File.WriteAllTextAsync(txtPath, "Здесь будет результат работы Whisper AI...");;
 
             return RedirectToAction("Index");
         }
