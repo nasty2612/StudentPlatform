@@ -17,9 +17,11 @@ namespace StudentPlatform.Domain
         {
             base.OnModelCreating(builder);
 
-            string adminName = "admin";
+            string adminName = "admin"; // Админ
+            string userName = "user"; // Обычный пользователь
             string roleAdminId = Guid.NewGuid().ToString();
             string UserAdminId = Guid.NewGuid().ToString();
+            string roleUSerId = Guid.NewGuid().ToString();
 
             // Добавляем роль администратора сайта
             builder.Entity<IdentityRole>().HasData(new IdentityRole()
@@ -29,15 +31,24 @@ namespace StudentPlatform.Domain
                 NormalizedName = adminName.ToUpper()
             });
 
+            // Добавляем роль пользователя
+            builder.Entity<IdentityRole>().HasData(new IdentityRole()
+            {
+                Id = roleUSerId,
+                Name = userName,
+                NormalizedName = userName.ToUpper()
+            });
+
             // Добавляем нового IdentityUser  как администратора сайта
             builder.Entity<IdentityUser>().HasData(new IdentityUser()
             {
                 Id = UserAdminId,
                 UserName = adminName,
                 NormalizedUserName = adminName.ToUpper(),
-                Email = "admin@admin.com",
-                NormalizedEmail = "admin@admin.com",
+                Email = "bnastya261206@mail.ru",
+                NormalizedEmail = "bnastya261206@mail.ru",
                 EmailConfirmed = true,
+                TwoFactorEnabled = true, // 2FA
                 PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(new IdentityUser(), adminName),
                 SecurityStamp = string.Empty,
                 PhoneNumberConfirmed = true

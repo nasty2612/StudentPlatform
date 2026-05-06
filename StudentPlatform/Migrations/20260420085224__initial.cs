@@ -202,7 +202,7 @@ namespace StudentPlatform.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "b743d6e0-bb9f-454a-98fa-21dd9420021b", 0, "61051b15-609d-4680-b86e-26e6df2763a6", "admin@admin.com", true, false, null, "admin@admin.com", "ADMIN", "AQAAAAIAAYagAAAAEKGspFiqp73zzBqFVQzqJh0ZCDJ3UD6oeWYt4GdiZ/DMgYNF/ZyIsVA71u2Tamse/A==", null, true, "", false, "admin" });
+                values: new object[] { "b743d6e0-bb9f-454a-98fa-21dd9420021b", 0, "61051b15-609d-4680-b86e-26e6df2763a6", "bnastya261206@mail.ru", true, false, null, "bnastya261206@mail.ru", "ADMIN", "AQAAAAIAAYagAAAAEKGspFiqp73zzBqFVQzqJh0ZCDJ3UD6oeWYt4GdiZ/DMgYNF/ZyIsVA71u2Tamse/A==", null, true, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

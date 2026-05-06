@@ -51,9 +51,15 @@ namespace StudentPlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c51f1b2-4a20-43c8-b7c9-76f315731a1f",
+                            Id = "984feb94-2a4d-4d05-b612-78057e50f9e6",
                             Name = "admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "6b0ab31f-a723-4529-9f04-722b744b992f",
+                            Name = "user",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -149,18 +155,18 @@ namespace StudentPlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b743d6e0-bb9f-454a-98fa-21dd9420021b",
+                            Id = "072d2e49-4b9e-4dbe-9806-76586c4da64d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "61051b15-609d-4680-b86e-26e6df2763a6",
-                            Email = "admin@admin.com",
+                            ConcurrencyStamp = "2613003a-a994-4178-8e9c-a404f9ca4f25",
+                            Email = "bnastya261206@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "admin@admin.com",
+                            NormalizedEmail = "bnastya261206@mail.ru",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKGspFiqp73zzBqFVQzqJh0ZCDJ3UD6oeWYt4GdiZ/DMgYNF/ZyIsVA71u2Tamse/A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPbtZNu5XOU7pw4oLXFN4IFOy78SPAhDQHfR83BrPEa6Ws1qG44hUfRXdjGGN/ZzoA==",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
-                            TwoFactorEnabled = false,
+                            TwoFactorEnabled = true,
                             UserName = "admin"
                         });
                 });
@@ -229,8 +235,8 @@ namespace StudentPlatform.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "b743d6e0-bb9f-454a-98fa-21dd9420021b",
-                            RoleId = "5c51f1b2-4a20-43c8-b7c9-76f315731a1f"
+                            UserId = "072d2e49-4b9e-4dbe-9806-76586c4da64d",
+                            RoleId = "984feb94-2a4d-4d05-b612-78057e50f9e6"
                         });
                 });
 

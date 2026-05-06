@@ -41,6 +41,8 @@ namespace StudentPlatform
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            // Настраиваем сервис отправрки кодов по почте для 2FA
+            builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
             // Настравиваем auth cookie
             builder.Services.ConfigureApplicationCookie(options =>
             {
